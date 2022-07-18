@@ -3,7 +3,11 @@ import styles from '@/styles/Home.module.css'
 import Footer from './Footer'
 import Header from './Header'
 import Showcase from './Showcase'
+import { useRouter } from 'next/router'
+
 export default function Layout({ title, keywords, description, children }) {
+    const router = useRouter()
+    console.log(router)
     return (
         <div>
             <Head>
@@ -12,7 +16,7 @@ export default function Layout({ title, keywords, description, children }) {
                 <meta name='keywords' keywords={keywords} />
             </Head>
             <Header />
-            <Showcase />
+            {router.pathname === '/' && <Showcase />}
             <div className={styles.container}>
                 {children}
             </div>
@@ -23,7 +27,7 @@ export default function Layout({ title, keywords, description, children }) {
 }
 
 Layout.defaultProps = {
-    title: 'Find all dj events',
+    title: 'Find your DJ Events',
     keywords: ' dj, music concerts, parties',
     description: 'find all latest dj, music concerts, parties'
 }

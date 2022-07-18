@@ -1,8 +1,22 @@
 import Layout from "@/components/Layout"
-export default function HomePage() {
+import { API_URL } from '@/config/index'
+export default function HomePage({ posts }) {
+  console.log(posts)
   return (
     <Layout>
-      <h1>HomePage</h1>
+      <h1>Upcoming Events</h1>
     </Layout>
   )
+}
+
+export async function getStaticProps() {
+  const res = await fetch(`${API_URL}/api/events`)
+  const posts = await res.json()
+
+  return {
+    props: {
+      posts,
+    },
+    revalidate: 1,
+  }
 }
