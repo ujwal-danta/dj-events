@@ -4,6 +4,9 @@ import Image from 'next/image'
 import styles from '@/styles/Event.module.css'
 import { FaPencilAlt, FaTimes } from 'react-icons/fa'
 import Layout from "@/components/Layout"
+import { useRouter } from 'next/router'
+
+
 export default function EventPage({ post }) {
     const deleteEvent = (e) => {
         console.log('delete')
@@ -29,7 +32,7 @@ export default function EventPage({ post }) {
                 <h1>{post.name}</h1>
                 {post.image && (
                     <div className={styles.image}>
-                        <Image src={post.image} width={960} height={600} />
+                        <Image src={post.image.data.attributes.formats.medium.url} width={960} height={600} />
                     </div>
                 )}
                 <h3>Peformers:</h3>
@@ -53,17 +56,16 @@ export default function EventPage({ post }) {
 export async function getStaticPaths() {
     const res = await fetch(`${API_URL}/api/events`)
     const events = await res.json()
-    console.log(events)
-    const paths = events.map(evt => ({
-        params: { slug: evt.slug }
+    const paths = events.data.map(evt => ({
+        params: { slug: evt.id.toString() }
     }))
     return { paths, fallback: true }
 }
 
 export async function getStaticProps({ params }) {
-    const res = await fetch(`${API_URL}/api/events/${params.slug}`)
+    const res = await fetch(`${API_URL}/api/events/${params.slug}/?populate=*`)
     const post = await res.json()
 
     // Pass post data to the page via props
-    return { props: { post: post[0] } }
+    return { props: { post: post.data.attributes } }
 }
