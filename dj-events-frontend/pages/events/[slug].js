@@ -33,7 +33,7 @@ export default function EventPage({ post }) {
                     </div>
                 )}
                 <h3>Peformers:</h3>
-                <p>{post.peformers}</p>
+                <p>{post.performers}</p>
                 <h3>Description:</h3>
                 <p>{post.description}</p>
                 <h3>Venue: {post.venue}</h3>
