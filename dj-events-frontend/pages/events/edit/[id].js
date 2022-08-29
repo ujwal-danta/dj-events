@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Image from 'next/image'
 import { FaImage } from 'react-icons/fa'
+import Modal from '@/components/Modal'
 export default function EditEventPage({ evt, id }) {
     const [values, setValues] = useState({
         name: evt.name,
@@ -21,6 +22,7 @@ export default function EditEventPage({ evt, id }) {
     })
 
     const [imagePreview, setImagePreview] = useState(evt.image ? evt.image.data.attributes.formats.thumbnail.url : null)
+    const [showModal, setShowModal] = useState(false)
 
     const router = useRouter()
 
@@ -149,10 +151,15 @@ export default function EditEventPage({ evt, id }) {
                 <p>No image uploaded</p>
             </div>}
             <div>
-                <button className="btn-secondary">
+                <button className="btn-secondary"
+                    onClick={() => setShowModal(true)}
+                >
                     <FaImage /> Set Image
                 </button>
             </div>
+            <Modal show={showModal} onClose={() => setShowModal(false)}>
+                IMAGE UPLOAD
+            </Modal>
         </Layout>
     )
 }
