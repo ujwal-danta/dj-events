@@ -1770,7 +1770,7 @@
     "@strapi/utils" "4.2.3"
     "fs-extra" "10.0.0"
 
-"@strapi/strapi@4.2.3":
+"@strapi/strapi@^4.0.7", "@strapi/strapi@4.2.3":
   "integrity" "sha512-kK7sBD1/xX5Kf4knESZcYF4mUTrbbLVt15v62UROcnga7ZNWt4QlzVJEL8y6R02n1HWVg6brslQ9aegLE08E8Q=="
   "resolved" "https://registry.npmjs.org/@strapi/strapi/-/strapi-4.2.3.tgz"
   "version" "4.2.3"
@@ -1827,7 +1827,7 @@
     "statuses" "2.0.1"
     "uuid" "^3.3.2"
 
-"@strapi/utils@4.2.3":
+"@strapi/utils@^4.0.7", "@strapi/utils@4.2.3":
   "integrity" "sha512-ICkOI+JqSYyocwazZlaUz6oHgacyx3H5V9edeAdhISXjfZRX6GjtUDElTfQdGj9xsUUYSApFvY0DaiLTc0Utpg=="
   "resolved" "https://registry.npmjs.org/@strapi/utils/-/utils-4.2.3.tgz"
   "version" "4.2.3"
@@ -9358,6 +9358,11 @@
   "resolved" "https://registry.npmjs.org/sliced/-/sliced-1.0.1.tgz"
   "version" "1.0.1"
 
+"slugify@^1.6.5":
+  "integrity" "sha512-8mo9bslnBO3tr5PEVFzMPIWwWnipGS0xVbYf65zxDqfNwmzYn1LpiKNrR6DlClusuvo+hDHd1zKpmfAe83NQSQ=="
+  "resolved" "https://registry.npmjs.org/slugify/-/slugify-1.6.5.tgz"
+  "version" "1.6.5"
+
 "smart-buffer@^4.2.0":
   "integrity" "sha512-94hK0Hh8rPqQl2xXc3HsaBoOXKV20MToPkcXvwbISWLEs+64sBq5kFgn2kJDHb1Pry9yrP0dxrCI9RRci7RXKg=="
   "resolved" "https://registry.npmjs.org/smart-buffer/-/smart-buffer-4.2.0.tgz"
@@ -9589,6 +9594,13 @@
   "integrity" "sha512-/c645XdExBypL01TpFKiG/3RAa/Qmu+zRi0MwAmrdEkwHNuN0ebo8ccAXBBDa5Z0QOJgBskUIbuCK91x0sCVEw=="
   "resolved" "https://registry.npmjs.org/std-env/-/std-env-3.1.1.tgz"
   "version" "3.1.1"
+
+"strapi-plugin-slugify@^2.2.3":
+  "integrity" "sha512-o5Vpe7Ii4xAxxS0f9fUmjUghLipEyqISMHfvX3YxJQIwIh6K+xDOcyPfhcnaAx25kTkrARoVGcdtoQiwqGurEw=="
+  "resolved" "https://registry.npmjs.org/strapi-plugin-slugify/-/strapi-plugin-slugify-2.2.3.tgz"
+  "version" "2.2.3"
+  dependencies:
+    "@sindresorhus/slugify" "1.1.0"
 
 "stream-browserify@^3.0.0":
   "integrity" "sha512-H73RAHsVBapbim0tU2JwwOiXUj+fikfiaoYAKHF3VJfA0pe2BCzkhAHBlLG6REzE+2WNZcxOXjK7lkso+9euLA=="

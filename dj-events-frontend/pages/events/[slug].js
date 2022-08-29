@@ -1,3 +1,5 @@
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import { API_URL } from "@/config/index"
 import Link from 'next/link'
 import Image from 'next/image'
@@ -7,15 +9,32 @@ import Layout from "@/components/Layout"
 import { useRouter } from 'next/router'
 
 
-export default function EventPage({ post }) {
-    const deleteEvent = (e) => {
-        console.log('delete')
+export default function EventPage({ post, id }) {
+    const router = useRouter()
+    const deleteEvent = async (e) => {
+        if (confirm('Are you sure?')) {
+            const res = await fetch(`${API_URL}/api/events/${id}`,
+                {
+                    method: 'DELETE'
+                })
+
+            const data = await res.json()
+
+            if (!res.ok) {
+                toast.error(data.message)
+            }
+            else {
+                router.push(`/events`)
+            }
+        }
+
+
     }
     return (
         <Layout>
             <div className={styles.event}>
                 <div className={styles.controls}>
-                    <Link href={`/events/edit/${post.id}`}>
+                    <Link href={`/events/edit/${id}`}>
                         <a>
                             <FaPencilAlt /> Edit Event
                         </a>
@@ -32,7 +51,8 @@ export default function EventPage({ post }) {
                 <h1>{post.name}</h1>
                 {post.image && (
                     <div className={styles.image}>
-                        <Image src={post.image.data.attributes.formats.medium.url} width={960} height={600} />
+                        <Image src={post.image.data ? post.image.data.attributes.formats.large.url : '/images/event-default.png'}
+                            width={960} height={600} />
                     </div>
                 )}
                 <h3>Peformers:</h3>
@@ -67,5 +87,5 @@ export async function getStaticProps({ params }) {
     const post = await res.json()
 
     // Pass post data to the page via props
-    return { props: { post: post.data.attributes } }
+    return { props: { post: post.data.attributes, id: post.data.id } }
 }
