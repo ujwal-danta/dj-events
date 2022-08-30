@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Image from 'next/image'
 import { FaImage } from 'react-icons/fa'
 import Modal from '@/components/Modal'
+import ImageUpload from '@/components/ImageUpload'
 export default function EditEventPage({ evt, id }) {
     const [values, setValues] = useState({
         name: evt.name,
@@ -21,7 +22,7 @@ export default function EditEventPage({ evt, id }) {
         description: evt.description,
     })
 
-    const [imagePreview, setImagePreview] = useState(evt.image ? evt.image.data.attributes.formats.thumbnail.url : null)
+    const [imagePreview, setImagePreview] = useState(evt.image.data ? evt.image.data.attributes.formats.thumbnail.url : null)
     const [showModal, setShowModal] = useState(false)
 
     const router = useRouter()
@@ -61,6 +62,14 @@ export default function EditEventPage({ evt, id }) {
         const { name, value } = e.target
         setValues({ ...values, [name]: value })
     }
+
+    const imageUploaded = async (e) => {
+        const res = await fetch(`${API_URL}/api/events/${id}?populate=*`)
+        const data = await res.json()
+        setImagePreview(data.data.attributes.image.data.attributes.formats.thumbnail.url)
+        setShowModal(false)
+    }
+
 
     return (
         <Layout title='Add New Event'>
@@ -158,7 +167,7 @@ export default function EditEventPage({ evt, id }) {
                 </button>
             </div>
             <Modal show={showModal} onClose={() => setShowModal(false)}>
-                IMAGE UPLOAD
+                <ImageUpload evtId={id} imageUploaded={imageUploaded} />
             </Modal>
         </Layout>
     )

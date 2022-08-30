@@ -51,7 +51,7 @@ export default function EventPage({ post, id }) {
                 <h1>{post.name}</h1>
                 {post.image && (
                     <div className={styles.image}>
-                        <Image src={post.image.data ? post.image.data.attributes.formats.large.url : '/images/event-default.png'}
+                        <Image src={post.image.data ? post.image.data.attributes.formats.medium.url : '/images/event-default.png'}
                             width={960} height={600} />
                     </div>
                 )}
