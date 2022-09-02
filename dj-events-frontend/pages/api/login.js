@@ -2,6 +2,7 @@ import { API_URL } from "@/config/index"
 import cookie from 'cookie'
 export default async (req, res) => {
     if (req.method == 'POST') {
+        console.log('Making post req from api/login')
         const { identifier, password } = req.body
         const strapiRes = await fetch(`${API_URL}/api/auth/local`, {
             method: 'POST',
@@ -15,7 +16,7 @@ export default async (req, res) => {
         })
 
         const data = await strapiRes.json()
-        console.log(data.jwt)
+        console.log(data)
 
 
         if (strapiRes.ok) {
