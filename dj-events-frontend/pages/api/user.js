@@ -7,7 +7,6 @@ export default async (req, res) => {
             return
         }
         const { token } = cookie.parse(req.headers.cookie)
-        // console.log('Token is - ', token)
 
         const strapiRes = await fetch(`${API_URL}/api/users/me`, {
             headers: {
