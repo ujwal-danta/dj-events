@@ -73,16 +73,25 @@ export default function EventPage({ post, id }) {
 }
 
 
-export async function getStaticPaths() {
-    const res = await fetch(`${API_URL}/api/events`)
-    const events = await res.json()
-    const paths = events.data.map(evt => ({
-        params: { slug: evt.id.toString() }
-    }))
-    return { paths, fallback: true }
-}
+// export async function getStaticPaths() {
+//     const res = await fetch(`${API_URL}/api/events`)
+//     const events = await res.json()
+//     const paths = events.data.map(evt => ({
+//         params: { slug: evt.id.toString() }
+//     }))
+//     return { paths, fallback: true }
+// }
 
-export async function getStaticProps({ params }) {
+// export async function getStaticProps({ params }) {
+//     const res = await fetch(`${API_URL}/api/events/${params.slug}/?populate=*`)
+//     const post = await res.json()
+
+//     // Pass post data to the page via props
+//     return { props: { post: post.data.attributes, id: post.data.id } }
+// }
+
+
+export async function getServerSideProps({ params }) {
     const res = await fetch(`${API_URL}/api/events/${params.slug}/?populate=*`)
     const post = await res.json()
 
